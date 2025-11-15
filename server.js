@@ -11,11 +11,13 @@ dotenv.config();
 connectDB();
 
 const app = express();
+
+// Dynamic Port (Render/Vercel compatible)
 const PORT = process.env.PORT || 5000;
 
-// ---------------- CORS FIXED (Final Correct Setup) ----------------
+// ---------------- CORS (Perfect for Production) ----------------
 app.use(cors({
-    origin: ["http://localhost:5173"],   // React (Vite)
+    origin: "*",   // Allow all origins (You can replace * with frontend URL later)
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
 }));
@@ -34,5 +36,5 @@ app.use('/api/contact', contactRoutes);
 
 // Start Server
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
